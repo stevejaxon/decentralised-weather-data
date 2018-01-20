@@ -1,0 +1,25 @@
+{
+  "name": "decentralised-weather-data",
+  "version": "1.0.0",
+  "description": "A blockchain-based system for storing weather data",
+  "main": "main.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevejaxon/decentralised-weather-data.git"
+  },
+  "keywords": [
+    "nodejs",
+    "twillio",
+    "blockchain",
+    "bigchaindb"
+  ],
+  "author": "SteveJaxon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/stevejaxon/decentralised-weather-data/issues"
+  },
+  "homepage": "https://github.com/stevejaxon/decentralised-weather-data#readme"
+}
