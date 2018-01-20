@@ -22,7 +22,14 @@ exports.BigchainDbConnection = class {
     }
 
     async retrieveWeatherData(longitude, latitude) {
-        return this.conn.searchAssets(longitude);
+        return this.conn.searchAssets(longitude)
+            .then((results) => {
+                if (results.length > 0) {
+                    return results[0]
+                } else {
+                    return results;
+                }
+            })
     }
 };
 
