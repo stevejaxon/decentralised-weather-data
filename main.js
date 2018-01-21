@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require("body-parser");
+const figlet = require('figlet');
 const app = express();
 const blockchain = require('./src/main/nodejs/blockchain/bigchainDb');
 const bigchainDB = new blockchain.BigchainDbConnection();
@@ -28,5 +29,12 @@ app.post('/weather', function (req, res) {
             res.status(500).send({ error: err });
         })
 });
+
+console.log(figlet.textSync(' THOR', {
+    font: 'Standard',
+    horizontalLayout: 'default',
+    verticalLayout: 'default'
+}));
+console.log("⚡ Decentralised Weather Data ⚡");
 
 app.listen(3000);
