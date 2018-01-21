@@ -16,8 +16,27 @@ public class TwilioExample {
 	    Message message = Message.creator(new PhoneNumber("+447769330521"),
 	        new PhoneNumber("+441270260308"), 
 	        "Hello from weather app!").create();
-
 	    System.out.println(message.getSid());
+        
 	  }
+	  
+	  public static String broadcastWeather(String phoneNumber) {
+		    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+		    String forecast = "Tomorrows Weather in Shuzenji: Overcast Clouds, Min: 13.89 C, Max: 18.89 C, Rain: 0 mm";
+		    
+		    for(String num : phoneNumber.split(",")) {
+			    	Message message = Message.creator(new PhoneNumber(num),
+					        new PhoneNumber("+441270260308"), 
+					        forecast).create();
+					    String sid = message.getSid();
+						System.out.println(sid);
+						Message messageFromLog = Message.fetcher(sid).fetch();
+				        String body = messageFromLog.getBody();
+						System.out.println(body + " | TO: " + num);
+		    }
+
+			return forecast;
+	        
+		  }
 	  
 }
