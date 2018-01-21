@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "bigchaindb-driver": "^3.2.0",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "figlet": "^1.2.0"
   }
 }
