@@ -25,15 +25,7 @@ exports.BigchainDbConnection = class {
             }
 
             let weatherData = new d.WeatherData(data.temp, data.rain, data.humidity);
-            /*const tx = driver.Transaction.makeCreateTransaction(
-                weatherStation,
-                weatherData,
-                [ driver.Transaction.makeOutput(driver.Transaction.makeEd25519Condition(this.dataPersister.publicKey))],
-                this.dataPersister.publicKey
-            );
-            const txSigned = driver.Transaction.signTransaction(tx, this.dataPersister.privateKey);
-            this.conn.postTransaction(txSigned);
-            return this.conn.pollStatusAndFetchTransaction(txSigned.id)*/
+            await weatherStation.recordWeather(weatherData);
         } catch(e) {
             throw e;
         }

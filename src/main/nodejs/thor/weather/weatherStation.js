@@ -24,9 +24,23 @@ exports.WeatherStation = class extends DID {
             }
         })
         .then(asset => {
-            console.log(asset);
             this.bigchainId = asset.id;
             console.log(this.bigchainId);
         });
+    }
+
+    async recordWeather(weatherData) {
+        return this.myModel.retrieve(this.bigchainId)
+            .then(assets => {
+                console.log(assets);
+                return assets[0].append({
+                    toPublicKey: this.entity.publicKey,
+                    keypair: this.entity,
+                    data: { weatherData }
+                })
+            })
+            .then(updatedAsset => {
+               console.log(updatedAsset);
+            });
     }
 };
