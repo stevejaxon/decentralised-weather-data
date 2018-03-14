@@ -43,4 +43,15 @@ exports.WeatherStation = class extends DID {
                console.log(updatedAsset);
             });
     }
+
+    async retrieveAllWeatherData() {
+        return this.myModel.retrieve(this.bigchainId)
+            .then(assets => {
+                return assets;
+            })
+            .catch(err => {
+               console.log(err);
+               throw err;
+            });
+    }
 };

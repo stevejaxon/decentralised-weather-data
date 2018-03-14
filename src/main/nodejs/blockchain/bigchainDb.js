@@ -15,15 +15,8 @@ exports.BigchainDbConnection = class {
 
     async storeWeatherData(data) {
         try {
-            let weatherStation = new w.WeatherStation(data.lat, data.long, data.owner);
-            let weatherStationId;
-            if (this.weatherStationMap.get(weatherStation)) {
-                weatherStationId = this.weatherStationMap.get(weatherStation);
-            } else {
-                weatherStationId = await weatherStation.register();
-                this.weatherStationMap.set(weatherStation, weatherStationId);
-            }
-
+            let weatherStation = new w.WeatherStation();
+            weatherStation.bigchainId = data.id;
             let weatherData = new d.WeatherData(data.temp, data.rain, data.humidity);
             await weatherStation.recordWeather(weatherData);
         } catch(e) {
@@ -32,14 +25,17 @@ exports.BigchainDbConnection = class {
     }
 
     async retrieveWeatherData(longitude, latitude) {
-        return this.conn.searchAssets(longitude)
+        let weatherStation = new w.WeatherStation();
+        weatherStation.bigchainId = longitude;
+        return weatherStation.retrieveAllWeatherData();
+        /*return this.conn.searchAssets(longitude)
             .then((results) => {
                 if (results.length > 0) {
                     return results[0]
                 } else {
                     return results;
                 }
-            })
+            })*/
     }
 };
 
