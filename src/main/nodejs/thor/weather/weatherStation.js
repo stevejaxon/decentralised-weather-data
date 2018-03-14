@@ -15,15 +15,18 @@ exports.WeatherStation = class extends DID {
 
     async register() {
         console.log('registering a new weather station in BigChain DB');
-        let asset = this.myModel.create({
+        return this.myModel.create({
             keypair: this.entity,
             data: {
                 latitude: this.latitude,
                 longitude: this.longitude,
                 owner: this.owner
             }
+        })
+        .then(asset => {
+            console.log(asset);
+            this.bigchainId = asset.id;
+            console.log(this.bigchainId);
         });
-        this.bigchainId = asset.id;
-        console.log(this.bigchainId);
     }
 };
